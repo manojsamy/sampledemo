@@ -17,7 +17,7 @@ pipeline{
        stage("pushing the image"){
             steps{
                 withCredentials([string(credentialsId: 'dockerpwd', variable: 'dockerpsd')]) {
-                sh "docker login -u manojimages -p $(dockerpsd)"
+                    sh "docker login -u manojimages -p ${dockerpsd}"
                     sh "docker push manojimages/sampletypes:${DOCKER_TAG}"
                 }
              }   
