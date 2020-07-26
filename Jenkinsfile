@@ -21,5 +21,10 @@ pipeline{
                 sh "docker push manojimages/sampletypes:$(Docker_tag)"
                 }
              }   
-                 
-       
+          }        
+       }   
+    }
+def getDockerTag(){
+    def tag = sh script: 'git rev-parse HEAD', returnStdout: true
+    return tag
+}    
