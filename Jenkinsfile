@@ -1,7 +1,7 @@
 pipeline{
     agent any
     environment{
-        Docker_tag = getDockerTag()
+        DOCKER_TAG = getDockerTag()
      }
     stages{
        stage("git checkout"){
@@ -11,14 +11,14 @@ pipeline{
              }
        stage("docker build"){
             steps{
-                sh "docker build . -t manojimages/sampletypes:$(Docker_tag)"
+                sh "docker build . -t manojimages/sampletypes:$(DOCKER_TAG)"
                 }
              }  
        stage("pushing the image"){
             steps{
                 withCredentials([string(credentialsId: 'dockerpwd', variable: 'dockerpsd')]) {
                 sh "docker login -u manojimages -p $(dockerpsd)"
-                sh "docker push manojimages/sampletypes:$(Docker_tag)"
+                sh "docker push manojimages/sampletypes:$(DOCKER_TAG)"
                 }
              }   
           }        
