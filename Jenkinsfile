@@ -11,14 +11,14 @@ pipeline{
              }
        stage("docker build"){
             steps{
-                sh "docker build . -t manojimages/sampletypes:$(DOCKER_TAG)"
+                sh "docker build . -t manojimages/sampletypes:${DOCKER_TAG}"
                 }
              }  
        stage("pushing the image"){
             steps{
                 withCredentials([string(credentialsId: 'dockerpwd', variable: 'dockerpsd')]) {
                 sh "docker login -u manojimages -p $(dockerpsd)"
-                sh "docker push manojimages/sampletypes:$(DOCKER_TAG)"
+                    sh "docker push manojimages/sampletypes:${DOCKER_TAG}"
                 }
              }   
           }        
